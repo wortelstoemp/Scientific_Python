@@ -1,13 +1,42 @@
 # ------------------------------------------------------------------------------
-# Python cheatsheet
+# Python 3 cheatsheet
 # ------------------------------------------------------------------------------
+# TODO(tom): http://www.scipy-lectures.org/intro/language/basic_types.html
+# ---------------------
+# Python environment
+# ---------------------
+# Python 3.5.6 :: Anaconda, Inc.
+# Numpy, Scipy (optimizers, regression, interpolation,...), 
+# Matplotlib (2D visualization), Mayavi (3D visualization),
+# scikit-learn (machine learning), scikit-image (image processing),
+# sympy (Maple stuff),
+# pandas (statistics)
+
+# Interactive Python: type ipython in Anaconda console
+# Run script: python my_script.py
+# Run script in ipython: %run my_script.py
+
+# ----------------------
+# Code
+# ----------------------
+
+# Print type of variable: print(type(a))
+# Data types can be changed!
 
 # Numbers
 x = 3                           # int
+z = 2
 y = 2.5                         # float
 print(x ** 2)                   # Exponentiation; prints "9"
 x += 1                          # no x++, ++x, x--, --x !!!
 print(y, y + 1, y * 2, y ** 2)  # Prints "2.5 3.5 5.0 6.25"
+u = x / z                       # float division => 1.5
+v = u // z                      # integer division => 1
+
+# Complex numbers
+a = 1.5 + 0.5j
+print(a.real)
+print(a.imag)
 
 
 # Boolean logic
@@ -90,7 +119,7 @@ print(xs)           # Prints "[3, 1, 'foo', 'bar']"
 x = xs.pop()        # Remove and return the last element of the list
 print(xs, x)        # Prints "[3, 1, 'foo'] bar"
 
-# Slicing
+# Slicing [start:stop:stride]
 print(nums[2:4])            # indexes [2, 4[
 print(nums[2:])             # indexes [2, end[
 print(nums[:2])             # indexes [start, 2[
