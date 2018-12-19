@@ -1,13 +1,23 @@
 # ------------------------------------------------------------------------------
 # Numpy cheatsheet
 # ------------------------------------------------------------------------------
-# TODO: http://www.scipy-lectures.org/intro/numpy/array_object.html
 # USE NUMPY INSTEAD OF LISTS (FASTER)!!!
+# For linear algebra use scipy.linalg instead of np.linalg!
 
 # Numpy array = grid of values of SAME type, 
 # index = tuple of positive ints. 
 # number of dimensions =  rank or tensor order of the array.
 # shape = tuple of ints giving size of array along each dimension.
+
+# The plan
+# ---------
+# Know how to create arrays : array, arange, ones, zeros.
+# Know the shape of the array with array.shape, 
+# then use slicing to obtain different views of the array: array[::2],... 
+# Adjust the shape of the array using reshape() or flatten it with ravel().
+# Obtain a subset of the elements of an array and/or modify their values with masks.
+# Know operations on arrays.
+# For advanced use: master the indexing with arrays of ints, broadcasting. 
 
 import numpy as np
 
@@ -55,7 +65,9 @@ a = np.zeros((2,2), dtype = float64)
 
 # Indexing and slicing: same as with Python lists
 
-# TODO(tom): np.tile()
+# Tiling (repeat a several times e.g. 2x along certain axes)
+a = np.array([0, 1, 2])
+b = np.tile(a, (2, 2))
 
 # Fancy indexing (masks)
 a = np.random.randint(0, 21, 15)
@@ -70,3 +82,90 @@ b = a[[2, 3, 2, 4, 2]]
 print(b)
 
 # TODO(tom): http://www.scipy-lectures.org/intro/numpy/operations.html
+# Elementwise operations
+a = np.array([1, 2, 3, 4])
+a + 1
+b = np.ones(4) + 1
+a - b
+a * b   # Elementwise!!!
+np.sin(a)
+np.log(a)
+np.exp(a)
+
+np.triu(a)              # Upper triangle
+np.tril(a)              # Lower triangle
+a.T                     # Transpose
+
+a == b                  # bool for each element
+a > b           
+np.array_equal(a, b)    # 1 bool
+np.logical_and(a, b)
+np.logical_or(a, b)
+np.logical_xor(a, b)
+np.logical_not(a, b)
+
+
+# Matrix multiplication
+a = np.ones((3, 3))
+b = a.dot(a)
+
+
+# Reductions
+x = np.array([1, 2, 3, 4])
+np.sum(x)
+x.sum()                 # alternative
+x.min()
+x.max()
+x.argmin()              # index of minimum
+x.argmax()              # index of maximum
+x.trace()
+x.mean()
+np.median(x)
+x.std()
+
+x = np.array([[1, 1], [2, 2]])
+x.sum(axis = 0)         # columns (first dimension)
+x.sum(axis = 1)         # rows (second dimension)
+x.sum(axis = -1)        # last axis
+
+a = np.zeros((100, 100))
+np.any(a != 0)
+np.all(a == a)
+
+
+# Broadcasting (transform arrays of different sizes to same size)
+# uses the same principle as elementwise operations, but now for any shape
+# http://www.scipy-lectures.org/_images/numpy_broadcasting.png
+
+
+# Shape manipulation
+a = np.array([[1, 2, 3], [4, 5, 6]])
+a = a.ravel()                               # flatten to 1D array
+b = a.flatten()                             # return a new flattened copy
+b = a.reshape((2, 3))
+b = a.reshape((2, -1))                      # -1 => inferred
+
+
+# Adding a new axis
+z = np.array([1, 2, 3])
+z[:, np.newaxis]
+
+# Resizing
+a = np.arange(4)
+a.resize((8,))
+
+# Out-of-place sorting
+a = np.array([[4, 3, 5], [1, 2, 1]])
+b = np.sort(a, axis = 0)                    # sort each column
+b = np.sort(a, axis = 1)                    # sort each row
+
+# In-place sorting
+a.sort()
+print(a)
+
+# Return array of sorted index order
+a = np.array([4, 3, 1, 2])
+indexes = np.argsort(a)
+print(indexes)
+
+# TODO(tom): http://www.scipy-lectures.org/intro/numpy/elaborate_arrays.html
