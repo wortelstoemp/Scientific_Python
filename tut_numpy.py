@@ -145,7 +145,6 @@ b = a.flatten()                             # return a new flattened copy
 b = a.reshape((2, 3))
 b = a.reshape((2, -1))                      # -1 => inferred
 
-
 # Adding a new axis
 z = np.array([1, 2, 3])
 z[:, np.newaxis]
@@ -168,4 +167,34 @@ a = np.array([4, 3, 1, 2])
 indexes = np.argsort(a)
 print(indexes)
 
-# TODO(tom): http://www.scipy-lectures.org/intro/numpy/elaborate_arrays.html
+# Loading data
+# data = np.loadtxt("data/populations.txt")
+# print(data)
+
+# Loading data in binary
+# data = np.load("pop.npy")
+
+# Saving data
+# np.savetxt("pop.txt", data)
+
+# Saving data in binary
+# data = np.ones((3, 3))
+# np.save('pop.npy', data)
+
+# Polynomials
+p = np.poly1d([3, 2, -1])                   # 3x^2 + 2x - 1
+p(0)
+r = p.roots
+
+# Casing
+a = np.array([1.7, 1.2, 1.6])
+b = a.astype(int)                           # <-- truncates to integer
+
+# Rounding
+a = np.array([1.2, 1.5, 1.6, 2.5, 3.5, 4.5])
+b = np.around(a)
+b                                           # still float !!!
+c = np.around(a).astype(int)                
+c                                           # casted to int
+
+# TODO(tom): ogrid and mgrid
