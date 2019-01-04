@@ -15,7 +15,14 @@ c = np.cos(x)
 s = np.sin(x)
 
 # Create a figure of size 8x6 inches, 80 dots per inch
-plt.figure(figsize=(8, 6), dpi=80)
+# FIGURES ARE NUMBERED STARTING FROM 1 INSTEAD OF 0 (like MATLAB)
+plt.figure(num=1, figsize=(8, 6), dpi=80, facecolor="w", edgecolor="w", frameon=True)
+
+# plt.close(1)     # Closes figure 1
+
+# Create a new subplot from a grid of 1x1 of index 1
+ax = plt.subplot(1, 1, 1)
+
 # Setting x and y limits
 plt.xlim(-4.0, 4.0)
 plt.ylim(-1.0, 1.0)
