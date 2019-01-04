@@ -24,6 +24,7 @@
 
 import numpy as np  # scipy depends on numpy
 
+
 # -------------------
 # I/O of Matlab files
 # -------------------
@@ -57,6 +58,7 @@ np.allclose(a_reconstruction, a)
 # Linear solvers
 # TODO: https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg
 
+
 # ------------------------------------------------------------------------------
 # Interpolation
 # ------------------------------------------------------------------------------
@@ -76,6 +78,7 @@ cubic_interp = interp1d(times, measurements, kind='cubic')
 linear_interp = interp1d(times, measurements)
 interpolation_times = np.linspace(0, 1, 50)
 results = linear_interp(interpolation_times)
+
 
 # ------------------------------------------------------------------------------
 # Optimization
@@ -118,6 +121,7 @@ result = optimize.minimize(f, x0 = 1, bounds = ((0, 10), ))
 # Finding roots of function
 root = optimize.root(f, x0 = 1)
 print(root.x)
+
 
 # ------------------------------------------------------------------------------
 # Statistics
@@ -165,7 +169,6 @@ result, error_estimate = quad(f, a, b)
 # Integrating first-order ODE's (Ordinary Differential Equations)
 # of form: dy/dt = func(y, t, ...)  [or func(t, y, ...)]
 # ------------------------------------------------------------------------------
-
 def func(y, t):
     return -2 * y
 
@@ -173,6 +176,7 @@ from scipy.integrate import odeint
 
 times = np.linspace(0, 4, 40)
 y = odeint(func, y0=1, t=times)
+
 
 # ------------------------------------------------------------------------------
 # Fast Fourier Transforms (use SciPy and NOT Numpy)
@@ -185,6 +189,77 @@ y = odeint(func, y0=1, t=times)
 
 
 # ------------------------------------------------------------------------------
-# Signal processing
+# Signal processing (1D signals or nD signals too)
 # ------------------------------------------------------------------------------
 # TODO: http://www.scipy-lectures.org/intro/scipy.html#signal-processing-scipy-signal
+from scipy import signal
+
+count = 100
+t = np.linspace(0, 5, count)
+x = np.sin(t)
+
+# Resample a signal to another n number of samples (by using FFT)
+n = 25
+x_resampled = signal.resample(x, n)
+
+# Detrending: remove linear tendency of a signal (make flat)
+x_detrended = signal.detrend(x)
+
+# Filtering 
+# scipy.signal.medfilt(), scipy.signal.wiener(), IIR filters,...
+# See https://docs.scipy.org/doc/scipy/reference/signal.html#module-scipy.signal
+
+# Spectrogram (frequency over time windows)
+# f, t, spectrogram = signal.spectrogram(x)
+
+# Power Spectrum  Density (PSD)
+# t, psd = scipy.signal.welch(x)
+
+
+# ------------------------------------------------------------------------------
+# Image processing (2D signals) = [y, x]
+# ------------------------------------------------------------------------------
+from scipy import ndimage
+
+# Load a test image
+from scipy import misc
+face = misc.face(gray=True)
+face = face[:512, -512:]
+
+# Geometrical transformations
+shifted_face = ndimage.shift(face, (50, 50))
+shifted_face2 = ndimage.shift(face, (50, 50), mode="nearest")
+rotated_face = ndimage.rotate(face, 30)
+cropped_face = face[50:-50, 50:-50]
+zoomed_face = ndimage.zoom(face, 2)
+
+# Noisy image
+import numpy as np
+noisy_face = np.copy(face).astype(np.float)
+noisy_face += face.std() * 0.5 * np.random.standard_normal(face.shape)
+
+# Filters (scipy.ndimage.filters & scipy.signal)
+blurred_face = ndimage.gaussian_filter(noisy_face, sigma=3)
+median_face = ndimage.median_filter(noisy_face, size=5)
+from scipy import signal
+wiener_face = signal.wiener(noisy_face, (5, 5))
+
+# Mathematical Morphology (erosion, dilation, opening, closing)
+#   Opening: erosion, then dilation => removes small objects, smooths corners
+#   Closing: dilation, then erosion => fills small holes
+#   
+#   First create binary mask from image, then do morphology on it and apply mask to image
+
+a = np.zeros((7, 7), dtype=np.int)
+a[1:6, 2:5] = 1
+
+elem = ndimage.generate_binary_structure(2, 1).astype(np.int) # 3x3 "+ cross of 1s (True)"
+elem2 = ndimage.generate_binary_structure(2, 2).astype(np.int) # 3x3 matrix of 1s
+
+b = ndimage.binary_erosion(a, structure=elem).astype(a.dtype)
+b = ndimage.binary_dilation(a, structure=elem).astype(a.dtype)
+b = ndimage.binary_opening(a, structure=elem).astype(np.int)
+b = ndimage.binary_closing(a, structure=elem).astype(np.int)
+
+# Connected components
+# TODO: http://www.scipy-lectures.org/intro/scipy.html#image_manipulation
