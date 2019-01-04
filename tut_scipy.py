@@ -37,7 +37,7 @@ print(data['a'])
 
 
 # -------------------
-# Linear algebra
+# Linear algebra (scipy.linalg)
 # -------------------
 # Uses efficient BLAS, LAPACK implementations
 from scipy import linalg
