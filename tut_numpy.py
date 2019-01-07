@@ -81,12 +81,12 @@ print(a)
 b = a[[2, 3, 2, 4, 2]]
 print(b)
 
-# TODO(tom): http://www.scipy-lectures.org/intro/numpy/operations.html
 # Elementwise operations
 a = np.array([1, 2, 3, 4])
 a + 1
 b = np.ones(4) + 1
 a - b
+2 ** a
 a * b   # Elementwise!!!
 np.sin(a)
 np.log(a)
@@ -103,6 +103,10 @@ np.logical_and(a, b)
 np.logical_or(a, b)
 np.logical_xor(a, b)
 np.logical_not(a, b)
+
+np.exp(a)
+np.log(a)
+np.sin(a)
 
 
 # Matrix multiplication
