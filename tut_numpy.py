@@ -214,3 +214,5 @@ c                                           # casted to int
 
 
 # TODO(tom): ogrid and mgrid
+
+# TODO(tom): Advanced NumPy http://www.scipy-lectures.org/advanced/advanced_numpy/index.html

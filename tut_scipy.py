@@ -260,6 +260,3 @@ b = ndimage.binary_erosion(a, structure=elem).astype(a.dtype)
 b = ndimage.binary_dilation(a, structure=elem).astype(a.dtype)
 b = ndimage.binary_opening(a, structure=elem).astype(np.int)
 b = ndimage.binary_closing(a, structure=elem).astype(np.int)
-
-# Connected components
-# TODO: http://www.scipy-lectures.org/intro/scipy.html#image_manipulation
