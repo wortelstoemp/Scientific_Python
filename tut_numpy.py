@@ -197,4 +197,16 @@ b                                           # still float !!!
 c = np.around(a).astype(int)                
 c                                           # casted to int
 
+# Meshgrid
+# x = np.array([1, 2, 3, 4])
+# y = np.array([5, 6, 7])
+# XX, YY = np.meshgrid(x, y)
+# 1 7   2 7     3 7      4 7
+# 1 6   2 6     3 6      4 6
+# 1 5   2 5     3 5      4 5
+# XX =  1 2 3 4     YY =    7 7 7 7
+#       1 2 3 4             6 6 6 6
+#       1 2 3 4             5 5 5 5
+
+
 # TODO(tom): ogrid and mgrid

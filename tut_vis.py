@@ -57,5 +57,61 @@ plt.show()
 # Save figure using 72 dots per inch
 # plt.savefig("exercise_2.png", dpi=72)
 
+# Scatter plots
+# plt.scatter(X, Y) # instead of plt.plot(X, Y)
+# plt.xticks(())
+# plt.yticks(())
+# plt.show()
 
-# Subplots
+# Bar plots
+# plt.bar(X, Y, facecolor="#9999ff", edgecolor="white")
+# for x, y in zip(X, Y):
+#    plt.text(x, y, '%.2f' % y, ha="center", va="bottom")
+# plt.xlim(-1.25, +1.25)
+# plt.ylim(-1.25, +1.25)
+# plt.xticks(())
+# plt.yticks(())
+# plt.show()
+
+# Contour plots of a function f(x, y)
+# X, Y = np.meshgrid(x, y)
+# Z = f(X, Y)
+# plt.contourf(X, Y, Z, 8, alpha=0.75, cmap=plt.cm.hot)
+# C = plt.contour(X, Y, Z, 8, colors="black", linewidth=0.5)
+# plt.clabel(C, inline=1, fontsize=10)
+# plt.xticks(())
+# plt.yticks(())
+# plt.show()
+
+# Imshow of a function f(x, y)
+# X, Y = np.meshgrid(x, y)
+# Z = f(X, Y)
+# plt.imshow(Z, interpolation="nearest", cmap="bone", origin="lower")
+# plt.colorbar(shrink=0.92)
+# plt.xticks(())
+# plt.yticks(())
+# plt.show()
+
+# Pie plot
+# n = 20
+# Z = np.ones(n)
+# plt.pie(Z, explode=Z*.05, colors = ['%f' % (i/float(n)) for i in range(n)])
+# plt.axis('equal')
+# plt.xticks(())
+# plt.yticks()
+# plt.show()
+
+# Text
+# eqs = []
+# eqs.append((r"$LaTeX text$"))
+# i = 0
+# plt.text(x, y, eqs[i], ha="center", va="center", color="#11557c", fontsize=16, clip_on=True)
+# plt.xticks(())
+# plt.yticks(())
+# plt.show()
+
+# Matplotlib tutorials
+# https://matplotlib.org/users/pyplot_tutorial.html
+# https://matplotlib.org/users/transforms_tutorial.html
+# https://matplotlib.org/users/index_text.html
+# https://matplotlib.org/users/artists.html
