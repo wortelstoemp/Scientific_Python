@@ -1,7 +1,7 @@
 # Visualisations
 # TODO(tom): http://www.scipy-lectures.org/intro/numpy/array_object.html#basic-visualization
 # TODO(tom): http://www.scipy-lectures.org/intro/matplotlib/index.html
-
+# TODO: https://www.oreilly.com/learning/an-illustrated-introduction-to-the-t-sne-algorithm
 # ------------------------------------------------------------------------------
 # matplotlib
 # ------------------------------------------------------------------------------
